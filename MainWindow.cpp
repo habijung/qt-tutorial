@@ -2,6 +2,7 @@
 #include "qpushbutton.h"
 #include "qmessagebox.h"
 #include "qboxlayout.h"
+#include "qcombobox.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
@@ -12,17 +13,27 @@ MainWindow::MainWindow(QWidget* parent)
 	QWidget* widget = new QWidget;
 	QVBoxLayout* vbox = new QVBoxLayout(widget);
 
+	widget->setLayout(vbox);
+	setCentralWidget(widget);
+
 	// Create buttons
 	QPushButton* btn1 = new QPushButton("Button1");
 	QPushButton* btn2 = new QPushButton("Button2");
-
 	vbox->addWidget(btn1);
 	vbox->addWidget(btn2);
-	vbox->addStretch();
 	vbox->addWidget(this->lineEdit);
+	vbox->addStretch();
 
-	widget->setLayout(vbox);
-	setCentralWidget(widget);
+	// Create ComboBox
+	QComboBox* cbox = new QComboBox;
+
+	for (int i = 0; i < 3; i++)
+	{
+		cbox->addItem(QIcon("./img/clover.png"), "c" + QString::number(i + 1));
+	}
+
+	vbox->addWidget(cbox);
+	vbox->addStretch();
 
 	// Button connect
 	connect(btn1, SIGNAL(clicked()), this, SLOT(on_clicked()));

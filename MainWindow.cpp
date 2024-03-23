@@ -157,8 +157,9 @@ MainWindow::MainWindow(QWidget* parent)
 
 	// Timer Settings
 	timer = new QTimer(this);
+	//timer->start(1000);
 	connect(timer, SIGNAL(timeout()), this, SLOT(on_timer()));
-	timer->start(1000);
+	connect(btn3, SIGNAL(clicked()), this, SLOT(on_timer()));
 }
 
 MainWindow::~MainWindow()

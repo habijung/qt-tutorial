@@ -6,16 +6,16 @@
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+	MainWindow(QWidget* parent = nullptr);
+	~MainWindow();
 
 private:
-    Ui::MainWindowClass ui;
-    QLineEdit* lineEdit = new QLineEdit;
+	Ui::MainWindowClass ui;
+	QLineEdit* lineEdit = new QLineEdit;
 
 private slots:
-    void on_clicked();
+	void on_clicked();
 };

@@ -13,4 +13,7 @@ public:
 
 private:
     Ui::MainWindowClass ui;
+
+private slots:
+    void on_clicked();
 };

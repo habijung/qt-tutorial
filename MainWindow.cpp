@@ -30,7 +30,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Button connect
     connect(btn1, SIGNAL(clicked()), this, SLOT(on_clicked()));
+    connect(btn2, &QPushButton::clicked, [btn1, lineEdit]()
+    {
+        qDebug() << "Button 2 clicked.";
+        lineEdit->setText("Button 2 clicked.");
+    });
 }
 
 MainWindow::~MainWindow()
 {}
+
+void MainWindow::on_clicked()
+{
+    qDebug() << "Button 1 clicked.";
+}

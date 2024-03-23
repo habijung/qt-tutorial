@@ -114,6 +114,7 @@ MainWindow::MainWindow(QWidget* parent)
 	QPushButton* btn1 = new QPushButton("Button1");
 	QPushButton* btn2 = new QPushButton("Button2");
 	QPushButton* btn3 = new QPushButton("Button3");
+	btn1->installEventFilter(this);
 
 	QHBoxLayout* hbox = new QHBoxLayout;
 	hbox->addWidget(btn1, 0, Qt::AlignLeft);
@@ -182,4 +183,23 @@ void MainWindow::on_timer()
 	QTime time = QTime::currentTime();
 	QString time_text = time.toString("hh : mm : ss");
 	qDebug() << "Time: " << time_text;
+}
+
+bool MainWindow::eventFilter(QObject* obj, QEvent* e)
+{
+	int key;
+	QString objName = obj->objectName();
+	QKeyEvent* keyEvent = static_cast<QKeyEvent*>(e);
+	QEvent::Type eventType = keyEvent->type();
+
+	if (eventType == QEvent::KeyPress)
+	{
+		qDebug() << "eventFilter :: Key Pressed";
+	}
+	else if (eventType == QEvent::MouseButtonRelease)
+	{
+		qDebug() << "eventFilter :: Button Released";
+	}
+
+	return QObject::eventFilter(obj, e);
 }

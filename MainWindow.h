@@ -24,4 +24,5 @@ private slots:
 	void on_clicked();
 	void on_submitButton_clicked();
 	void on_timer();
+	bool eventFilter(QObject* obj, QEvent* e);
 };

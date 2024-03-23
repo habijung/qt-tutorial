@@ -12,6 +12,13 @@ public:
 		btn_right = new QPushButton(this);
 	}
 
+	// Event Override
+	void resizeEvent(QResizeEvent* event) override {
+		// 생성한 버튼을 윈도우 수평 좌우 + 수직 가운데로 배치하기
+		btn_left->move(0, (height() - btn_left->height()) / 2);
+		btn_right->move(width() - btn_right->width(), (height() - btn_right->height()) / 2);
+	}
+
 	QPushButton* btn_left;
 	QPushButton* btn_right;
 };

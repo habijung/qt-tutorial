@@ -2,6 +2,7 @@
 #include "qpushbutton.h"
 #include "qmessagebox.h"
 #include "qboxlayout.h"
+#include "qpainter.h"
 
 class CentralWidget : public QWidget
 {
@@ -17,6 +18,12 @@ public:
 		// 생성한 버튼을 윈도우 수평 좌우 + 수직 가운데로 배치하기
 		btn_left->move(0, (height() - btn_left->height()) / 2);
 		btn_right->move(width() - btn_right->width(), (height() - btn_right->height()) / 2);
+	}
+
+	void paintEvent(QPaintEvent* event) override {
+		QPainter painter(this);
+		painter.setBrush(QBrush(Qt::BDiagPattern));
+		painter.drawRect(rect());
 	}
 
 	QPushButton* btn_left;

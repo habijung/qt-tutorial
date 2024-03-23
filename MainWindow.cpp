@@ -4,6 +4,30 @@
 #include "qboxlayout.h"
 #include "qpainter.h"
 #include "qevent.h"
+#include "qdialog.h"
+
+
+class CustomDialog : public QDialog
+{
+public:
+	CustomDialog(QWidget* parent) : QDialog(parent) {
+		lineEdit = new QLineEdit(this);
+
+		QPushButton* btn_left = new QPushButton("OK", this);
+		QPushButton* btn_right = new QPushButton("Cancel", this);
+		connect(btn_left, SIGNAL(clicked()), this, SLOT(accept()));
+		connect(btn_right, SIGNAL(clicked()), this, SLOT(reject()));
+
+		QVBoxLayout* vbox = new QVBoxLayout(this);
+		vbox->addWidget(lineEdit);
+		vbox->addWidget(btn_left);
+		vbox->addWidget(btn_right);
+	}
+
+private:
+	QLineEdit* lineEdit;
+};
+
 
 class CentralWidget : public QWidget
 {
@@ -39,6 +63,18 @@ public:
 		else if (event->button() == Qt::RightButton) {
 			qDebug() << "\nRight button clicked.\n";
 			QMessageBox::information(this, "Title", "Right button clicked.");
+		}
+		else if (event->button() == Qt::MiddleButton) {
+			qDebug() << "\nMiddle button clicked.\n";
+
+			CustomDialog* dialog = new CustomDialog(this);
+			// Modeless: 제어권을 독점하지 않아서 다른 작업이 가능함
+			//dialog->show();
+			//dialog->raise();
+			//dialog->activateWindow();
+
+			// Modal: 제어권을 가져가서 해당 창이 종료되기 전에 다른 작업 불가능
+			dialog->exec();
 		}
 	}
 

@@ -3,13 +3,19 @@
 #include "qmessagebox.h"
 #include "qboxlayout.h"
 
+class CentralWidget : public QWidget
+{
+public:
+	CentralWidget(QWidget* parent) : QWidget(parent) {}
+};
+
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
 
 	// Create button with central widget
-	QWidget* widget = new QWidget;
+	QWidget* widget = new CentralWidget(this);
 	QVBoxLayout* main_box = new QVBoxLayout(widget);
 
 	QVBoxLayout* vbox1 = new QVBoxLayout;

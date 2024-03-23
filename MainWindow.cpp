@@ -10,40 +10,47 @@ MainWindow::MainWindow(QWidget* parent)
 
 	// Create button with central widget
 	QWidget* widget = new QWidget;
-	QVBoxLayout* vbox = new QVBoxLayout(widget);
-	QHBoxLayout* hbox = new QHBoxLayout(widget);
+	QVBoxLayout* main_box = new QVBoxLayout(widget);
 
-	widget->setLayout(vbox);
-	setCentralWidget(widget);
+	QVBoxLayout* vbox1 = new QVBoxLayout;
+	QVBoxLayout* vbox2 = new QVBoxLayout;
 
-	// Create buttons
+	// Create upper box
 	QPushButton* btn1 = new QPushButton("Button1");
 	QPushButton* btn2 = new QPushButton("Button2");
-	vbox->addWidget(btn1);
-	vbox->addWidget(btn2);
-	vbox->addWidget(this->lineEdit);
-	vbox->addStretch();
+	QPushButton* btn3 = new QPushButton("Button3");
 
+	QHBoxLayout* hbox = new QHBoxLayout;
+	hbox->addWidget(btn1, 0, Qt::AlignLeft);
+	hbox->addStretch();
+	hbox->addWidget(btn2, 0, Qt::AlignCenter);
+	hbox->addStretch();
+	hbox->addWidget(btn3, 0, Qt::AlignRight);
+	hbox->addStretch();
+
+	vbox1->addLayout(hbox);
+	vbox1->addWidget(this->lineEdit);
+	vbox1->addStretch();
+
+	// Create lower box
 	// Set ComboBox
 	for (int i = 0; i < 3; i++)
 	{
 		this->cbox->addItem(QIcon("./img/clover.png"), "c" + QString::number(i + 1));
 	}
 
-	QPushButton* btn3 = new QPushButton("Submit");
+	QPushButton* btn_submit = new QPushButton("Submit");
 
-	vbox->addWidget(this->cbox);
-	vbox->addWidget(btn3);
-	vbox->addStretch();
+	vbox2->addWidget(this->cbox);
+	vbox2->addWidget(btn_submit);
+	vbox2->addStretch();
 
-	// QHBoxLayout test
-	QPushButton* hbtn1 = new QPushButton("H Button 1");
-	QPushButton* hbtn2 = new QPushButton("H Button 2");
-	hbox->addWidget(hbtn1);
-	hbox->addWidget(hbtn2);
-	vbox->addLayout(hbox);
+	main_box->addLayout(vbox1);
+	main_box->addLayout(vbox2);
+	widget->setLayout(main_box);
+	setCentralWidget(widget);
 
-	// Button connect
+	// Button connections
 	connect(btn1, SIGNAL(clicked()), this, SLOT(on_clicked()));
 	connect(btn2, &QPushButton::clicked, [this]()
 		{
@@ -52,7 +59,7 @@ MainWindow::MainWindow(QWidget* parent)
 		});
 
 	// TODO: PushButton 대신 ComboBox 선택으로 MessageBox 실행하기
-	connect(btn3, SIGNAL(clicked()), this, SLOT(on_submitButton_clicked()));
+	connect(btn_submit, SIGNAL(clicked()), this, SLOT(on_submitButton_clicked()));
 }
 
 MainWindow::~MainWindow()

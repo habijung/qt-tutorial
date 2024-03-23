@@ -114,7 +114,6 @@ MainWindow::MainWindow(QWidget* parent)
 	QPushButton* btn1 = new QPushButton("Button1");
 	QPushButton* btn2 = new QPushButton("Button2");
 	QPushButton* btn3 = new QPushButton("Button3");
-	btn1->installEventFilter(this);
 
 	QHBoxLayout* hbox = new QHBoxLayout;
 	hbox->addWidget(btn1, 0, Qt::AlignLeft);
@@ -161,6 +160,18 @@ MainWindow::MainWindow(QWidget* parent)
 	//timer->start(1000);
 	connect(timer, SIGNAL(timeout()), this, SLOT(on_timer()));
 	connect(btn3, SIGNAL(clicked()), this, SLOT(on_timer()));
+
+	// Event Filter Handling
+	btnEvent = new QPushButton(this);
+	btnControl = new QPushButton(this);
+
+	btnEvent->setText("Enabled");
+	main_box->addWidget(btnEvent);
+
+	btnControl->setText("Click");
+	btnControl->setObjectName("btnControl");
+	btnControl->installEventFilter(this);
+	main_box->addWidget(btnControl);
 }
 
 MainWindow::~MainWindow()
@@ -198,7 +209,22 @@ bool MainWindow::eventFilter(QObject* obj, QEvent* e)
 	}
 	else if (eventType == QEvent::MouseButtonRelease)
 	{
+		qDebug() << "objName: " << objName;
 		qDebug() << "eventFilter :: Button Released";
+
+		if (objName == "btnControl")
+		{
+			if (btnEvent->text() == "Enabled")
+			{
+				btnEvent->setText("Disabled");
+				btnEvent->setEnabled(false);
+			}
+			else
+			{
+				btnEvent->setText("Enabled");
+				btnEvent->setEnabled(true);
+			}
+		}
 	}
 
 	return QObject::eventFilter(obj, e);

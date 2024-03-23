@@ -1,3 +1,4 @@
+#include <QTime>
 #include "MainWindow.h"
 #include "qpushbutton.h"
 #include "qmessagebox.h"
@@ -177,5 +178,7 @@ void MainWindow::on_submitButton_clicked()
 
 void MainWindow::on_timer()
 {
-	qDebug() << "Timer ...";
+	QTime time = QTime::currentTime();
+	QString time_text = time.toString("hh : mm : ss");
+	qDebug() << "Time: " << time_text;
 }

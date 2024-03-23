@@ -3,6 +3,7 @@
 #include "qmessagebox.h"
 #include "qboxlayout.h"
 #include "qpainter.h"
+#include "qevent.h"
 
 class CentralWidget : public QWidget
 {
@@ -24,6 +25,21 @@ public:
 		QPainter painter(this);
 		painter.setBrush(QBrush(Qt::BDiagPattern));
 		painter.drawRect(rect());
+	}
+
+	void mousePressEvent(QMouseEvent* event) {
+		if (event->button() == Qt::LeftButton) {
+			qDebug() << "\nLeft button clicked.\n";
+			QMessageBox msgBox;
+			msgBox.setText("Left button clicked");
+			msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Close);
+			msgBox.setDefaultButton(QMessageBox::Ok);
+			int ret = msgBox.exec();
+		}
+		else if (event->button() == Qt::RightButton) {
+			qDebug() << "\nRight button clicked.\n";
+			QMessageBox::information(this, "Title", "Right button clicked.");
+		}
 	}
 
 	QPushButton* btn_left;

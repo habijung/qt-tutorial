@@ -62,10 +62,6 @@ public:
 		}
 		else if (event->button() == Qt::RightButton) {
 			qDebug() << "\nRight button clicked.\n";
-			QMessageBox::information(this, "Title", "Right button clicked.");
-		}
-		else if (event->button() == Qt::MiddleButton) {
-			qDebug() << "\nMiddle button clicked.\n";
 
 			CustomDialog* dialog = new CustomDialog(this);
 			// Modeless: 제어권을 독점하지 않아서 다른 작업이 가능함
@@ -75,6 +71,10 @@ public:
 
 			// Modal: 제어권을 가져가서 해당 창이 종료되기 전에 다른 작업 불가능
 			dialog->exec();
+		}
+		else if (event->button() == Qt::MiddleButton) {
+			qDebug() << "\nMiddle button clicked.\n";
+			QMessageBox::information(this, "Title", "Middle button clicked.");
 		}
 	}
 

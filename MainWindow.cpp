@@ -2,7 +2,6 @@
 #include "qpushbutton.h"
 #include "qmessagebox.h"
 #include "qboxlayout.h"
-#include "qcombobox.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent)
@@ -24,15 +23,13 @@ MainWindow::MainWindow(QWidget* parent)
 	vbox->addWidget(this->lineEdit);
 	vbox->addStretch();
 
-	// Create ComboBox
-	QComboBox* cbox = new QComboBox;
-
+	// Set ComboBox
 	for (int i = 0; i < 3; i++)
 	{
-		cbox->addItem(QIcon("./img/clover.png"), "c" + QString::number(i + 1));
+		this->cbox->addItem(QIcon("./img/clover.png"), "c" + QString::number(i + 1));
 	}
 
-	vbox->addWidget(cbox);
+	vbox->addWidget(this->cbox);
 	vbox->addStretch();
 
 	// Button connect

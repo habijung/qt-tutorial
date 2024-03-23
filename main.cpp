@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "Model.h"
+#include "Delegate.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
@@ -11,7 +12,9 @@ int main(int argc, char *argv[])
 
     QListView view;
     Model model;
+    Delegate delegate;
     view.setModel(&model);
+    view.setItemDelegate(&delegate);
     view.show();
 
     return a.exec();

@@ -43,12 +43,18 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Delegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Model.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Delegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

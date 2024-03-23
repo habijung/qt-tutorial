@@ -50,6 +50,13 @@ MainWindow::MainWindow(QWidget* parent)
 	widget->setLayout(main_box);
 	setCentralWidget(widget);
 
+	// Child widget test
+	// TODO: ìœˆë„ìš° ì‚¬ì´ì¦ˆ í¬ê¸°ë¥¼ ë°›ì•„ì„œ child buttonì„ ì˜¤ë¥¸ìª½ ì•„ë˜ë¡œ ì˜®ê¸°ê¸°
+	QPushButton* btn_child = new QPushButton(widget);
+	btn_child->setText("Child Widget");
+	btn_child->resize(200, 100);
+	btn_child->move(200, 250);
+
 	// Button connections
 	connect(btn1, SIGNAL(clicked()), this, SLOT(on_clicked()));
 	connect(btn2, &QPushButton::clicked, [this]()
@@ -58,7 +65,7 @@ MainWindow::MainWindow(QWidget* parent)
 			this->lineEdit->setText("Button 2 clicked.");
 		});
 
-	// TODO: PushButton ´ë½Å ComboBox ¼±ÅÃÀ¸·Î MessageBox ½ÇÇàÇÏ±â
+	// TODO: PushButton ëŒ€ì‹  ComboBox ì„ íƒìœ¼ë¡œ MessageBox ì‹¤í–‰í•˜ê¸°
 	connect(btn_submit, SIGNAL(clicked()), this, SLOT(on_submitButton_clicked()));
 }
 

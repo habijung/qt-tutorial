@@ -33,5 +33,35 @@ QSize Delegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& 
 
 bool Delegate::editorEvent(QEvent* event, QAbstractItemModel* model, const QStyleOptionViewItem& option, const QModelIndex& index)
 {
-	return true;
+	Q_UNUSED(model);
+
+	if (event->type() == QEvent::MouseButtonPress)
+	{
+		mPressedIndex = index;
+		return true;
+	}
+	else if (event->type() == QEvent::MouseButtonRelease)
+	{
+		qDebug("Pressed Index: %d", mPressedIndex.row() + 1);
+		emit ButtonClicked(index);
+		mPressedIndex = QModelIndex();
+		return true;
+	}
+	else if (event->type() == QEvent::MouseMove)
+	{
+		QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+
+		if (option.rect.contains(mouseEvent->pos()))
+		{
+			mHoveredIndex = index;
+		}
+		else
+		{
+			mHoveredIndex = QModelIndex();
+		}
+
+		return true;
+	}
+
+	return false;
 }

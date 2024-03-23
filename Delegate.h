@@ -2,6 +2,7 @@
 
 #include "qapplication.h"
 #include "qabstractitemdelegate.h"
+#include "qevent.h"
 
 class Delegate : public QAbstractItemDelegate
 {
@@ -20,5 +21,8 @@ public:
 private:
 	QModelIndex mPressedIndex;
 	QModelIndex mHoveredIndex;
+
+signals:
+	void ButtonClicked(const QModelIndex& index);
 };
 

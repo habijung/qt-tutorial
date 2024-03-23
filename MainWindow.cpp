@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget* parent)
 	// Create button with central widget
 	QWidget* widget = new QWidget;
 	QVBoxLayout* vbox = new QVBoxLayout(widget);
+	QHBoxLayout* hbox = new QHBoxLayout(widget);
 
 	widget->setLayout(vbox);
 	setCentralWidget(widget);
@@ -34,6 +35,13 @@ MainWindow::MainWindow(QWidget* parent)
 	vbox->addWidget(this->cbox);
 	vbox->addWidget(btn3);
 	vbox->addStretch();
+
+	// QHBoxLayout test
+	QPushButton* hbtn1 = new QPushButton("H Button 1");
+	QPushButton* hbtn2 = new QPushButton("H Button 2");
+	hbox->addWidget(hbtn1);
+	hbox->addWidget(hbtn2);
+	vbox->addLayout(hbox);
 
 	// Button connect
 	connect(btn1, SIGNAL(clicked()), this, SLOT(on_clicked()));

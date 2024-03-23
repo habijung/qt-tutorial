@@ -12,7 +12,6 @@ class CustomDialog : public QDialog
 {
 public:
 	CustomDialog(QWidget* parent) : QDialog(parent) {
-		/*
 		lineEdit = new QLineEdit(this);
 
 		QPushButton* btn_left = new QPushButton("OK", this);
@@ -24,7 +23,6 @@ public:
 		vbox->addWidget(lineEdit);
 		vbox->addWidget(btn_left);
 		vbox->addWidget(btn_right);
-		*/
 
 		listWidget = new QListWidget(this);
 		QString string = "1, 2, 3, 4";
@@ -34,6 +32,8 @@ public:
 		while (iter.hasNext()) {
 			listWidget->addItem("Item " + iter.next().trimmed());
 		}
+
+		vbox->addWidget(listWidget);
 	}
 
 private:

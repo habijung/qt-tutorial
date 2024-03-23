@@ -6,7 +6,14 @@
 class CentralWidget : public QWidget
 {
 public:
-	CentralWidget(QWidget* parent) : QWidget(parent) {}
+	CentralWidget(QWidget* parent) : QWidget(parent) {
+		// this를 안써주면 직접 해제해야 하므로 써주기
+		btn_left = new QPushButton(this);
+		btn_right = new QPushButton(this);
+	}
+
+	QPushButton* btn_left;
+	QPushButton* btn_right;
 };
 
 MainWindow::MainWindow(QWidget* parent)
@@ -36,7 +43,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 	vbox1->addLayout(hbox);
 	vbox1->addWidget(this->lineEdit);
-	vbox1->addStretch();
 
 	// Create lower box
 	// Set ComboBox
@@ -55,13 +61,6 @@ MainWindow::MainWindow(QWidget* parent)
 	main_box->addLayout(vbox2);
 	widget->setLayout(main_box);
 	setCentralWidget(widget);
-
-	// Child widget test
-	// TODO: 윈도우 사이즈 크기를 받아서 child button을 오른쪽 아래로 옮기기
-	QPushButton* btn_child = new QPushButton(widget);
-	btn_child->setText("Child Widget");
-	btn_child->resize(200, 100);
-	btn_child->move(200, 250);
 
 	// Button connections
 	connect(btn1, SIGNAL(clicked()), this, SLOT(on_clicked()));

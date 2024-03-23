@@ -153,6 +153,11 @@ MainWindow::MainWindow(QWidget* parent)
 
 	// TODO: PushButton 대신 ComboBox 선택으로 MessageBox 실행하기
 	connect(btn_submit, SIGNAL(clicked()), this, SLOT(on_submitButton_clicked()));
+
+	// Timer Settings
+	timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(on_timer()));
+	timer->start(1000);
 }
 
 MainWindow::~MainWindow()
@@ -168,4 +173,9 @@ void MainWindow::on_submitButton_clicked()
 {
 	qDebug() << "Submit: " << QString(this->cbox->currentText());
 	QMessageBox::information(this, "Submit", this->cbox->currentText());
+}
+
+void MainWindow::on_timer()
+{
+	qDebug() << "Timer ...";
 }

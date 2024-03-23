@@ -4,6 +4,7 @@
 #include "ui_MainWindow.h"
 #include "qlineedit.h"
 #include "qcombobox.h"
+#include "qtimer.h"
 
 class MainWindow : public QMainWindow
 {
@@ -17,8 +18,10 @@ private:
 	Ui::MainWindowClass ui;
 	QLineEdit* lineEdit = new QLineEdit;
 	QComboBox* cbox = new QComboBox;
+	QTimer* timer;
 
 private slots:
 	void on_clicked();
 	void on_submitButton_clicked();
+	void on_timer();
 };

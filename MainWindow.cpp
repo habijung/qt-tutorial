@@ -5,12 +5,14 @@
 #include "qpainter.h"
 #include "qevent.h"
 #include "qdialog.h"
+#include "qlistwidget.h"
 
 
 class CustomDialog : public QDialog
 {
 public:
 	CustomDialog(QWidget* parent) : QDialog(parent) {
+		/*
 		lineEdit = new QLineEdit(this);
 
 		QPushButton* btn_left = new QPushButton("OK", this);
@@ -22,10 +24,22 @@ public:
 		vbox->addWidget(lineEdit);
 		vbox->addWidget(btn_left);
 		vbox->addWidget(btn_right);
+		*/
+
+		listWidget = new QListWidget(this);
+		QString string = "1, 2, 3, 4";
+		QStringList items = string.split(",");
+		QStringListIterator iter(items);
+
+		while (iter.hasNext()) {
+			listWidget->addItem("Item " + iter.next().trimmed());
+		}
 	}
 
 private:
 	QLineEdit* lineEdit;
+	QListWidget* listWidget;
+	QStringList* stringList;
 };
 
 
@@ -70,6 +84,7 @@ public:
 			//dialog->activateWindow();
 
 			// Modal: 제어권을 가져가서 해당 창이 종료되기 전에 다른 작업 불가능
+			dialog->resize(100, 100);
 			dialog->exec();
 		}
 		else if (event->button() == Qt::MiddleButton) {

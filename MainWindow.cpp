@@ -29,7 +29,10 @@ MainWindow::MainWindow(QWidget* parent)
 		this->cbox->addItem(QIcon("./img/clover.png"), "c" + QString::number(i + 1));
 	}
 
+	QPushButton* btn3 = new QPushButton("Submit");
+
 	vbox->addWidget(this->cbox);
+	vbox->addWidget(btn3);
 	vbox->addStretch();
 
 	// Button connect
@@ -39,6 +42,9 @@ MainWindow::MainWindow(QWidget* parent)
 			qDebug() << "Button 2 clicked.";
 			this->lineEdit->setText("Button 2 clicked.");
 		});
+
+	// TODO: PushButton 대신 ComboBox 선택으로 MessageBox 실행하기
+	connect(btn3, SIGNAL(clicked()), this, SLOT(on_submitButton_clicked()));
 }
 
 MainWindow::~MainWindow()
@@ -48,4 +54,10 @@ void MainWindow::on_clicked()
 {
 	qDebug() << "Button 1 clicked.";
 	this->lineEdit->setText("Button 1 clicked.");
+}
+
+void MainWindow::on_submitButton_clicked()
+{
+	qDebug() << "Submit: " << QString(this->cbox->currentText());
+	QMessageBox::information(this, "Submit", this->cbox->currentText());
 }

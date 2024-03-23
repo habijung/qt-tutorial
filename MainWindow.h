@@ -20,4 +20,5 @@ private:
 
 private slots:
 	void on_clicked();
+	void on_submitButton_clicked();
 };
